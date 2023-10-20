@@ -8,9 +8,6 @@
 
 namespace nar
 {
-    inline static XrAction vibrateLeftFeedback;
-    inline static XrAction vibrateRightFeedback;
-
     JNIEXPORT static jlong JNICALL Java_edu_ufl_digitalworlds_j4q_J4Q_stopHapticFeedbackLeft(JNIEnv *env, jclass obj) {
         XrHapticActionInfo hapticActionInfo = {};
         hapticActionInfo.type = XR_TYPE_HAPTIC_ACTION_INFO;

@@ -1,7 +1,7 @@
 #pragma once
-#include "OvrEgl.h"
-#include "OvrRenderer.h"
-#include "OvrScene.h"
+#include "EglOperations.h"
+#include "RendererOperations.h"
+#include "SceneOperations.h"
 #include "engine/Constants.h"
 #include <assert.h>
 #include "engine/types/ovrApp.h"

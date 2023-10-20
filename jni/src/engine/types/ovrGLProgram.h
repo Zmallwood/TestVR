@@ -4,7 +4,7 @@
 
 namespace nar
 {
-    struct ovrProgram {
+    struct ovrGLProgram {
         GLuint Program;
         GLuint VertexShader;
         GLuint FragmentShader;

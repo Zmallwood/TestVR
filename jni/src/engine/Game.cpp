@@ -4,9 +4,9 @@
 #include "Global.h"
 #include "vr_engine/OpenXRUtilityFunctions.h"
 #include "vr_engine/OvrApp_GetInstance.h"
-#include "vr_engine/OvrRenderer.h"
-#include "vr_engine/OvrEgl.h"
-#include "vr_engine/OvrApp.h"
+#include "vr_engine/RendererOperations.h"
+#include "vr_engine/EglOperations.h"
+#include "vr_engine/AppOperations.h"
 
 namespace nar
 {

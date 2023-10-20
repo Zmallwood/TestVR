@@ -1,6 +1,6 @@
 #pragma once
 #include "ovrBackgroundType.h"
-#include "ovrProgram.h"
+#include "ovrGLProgram.h"
 #include "ovrGeometry.h"
 #include "ovrTrackedController.h"
 #include "ovrSwapChain.h"
@@ -10,7 +10,7 @@ namespace nar
     struct ovrScene {
         bool CreatedScene;
         bool CreatedVAOs;
-        ovrProgram Program;
+        ovrGLProgram Program;
         ovrGeometry GroundPlane;
         ovrGeometry Box;
         ovrTrackedController TrackedController[4]; // left aim, left grip, right aim, right grip

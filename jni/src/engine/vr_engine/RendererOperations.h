@@ -1,7 +1,7 @@
 #pragma once
 #include "Angelos.h"
-#include "OvrFrameBuffer.h"
-#include "OvrScene.h"
+#include "FrameBufferOperations.h"
+#include "SceneOperations.h"
 #include "engine/Constants.h"
 
 namespace nar

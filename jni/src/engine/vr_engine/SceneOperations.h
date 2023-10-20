@@ -2,9 +2,9 @@
 #include "KTXLoading.h"
 #include "OpenXRUtilityFunctions.h"
 #include "OvrApp_GetInstance.h"
-#include "OvrGeometry.h"
-#include "OvrProgram.h"
-#include "OvrTrackedController.h"
+#include "gl/GeometryOperations.h"
+#include "gl/GLProgramOperations.h"
+#include "input/TrackedControllerOperations.h"
 #include "engine/Global.h"
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
@@ -31,7 +31,7 @@ namespace nar
     static void ovrScene_Clear(ovrScene *scene) {
         scene->CreatedScene = false;
         scene->CreatedVAOs = false;
-        ovrProgram_Clear(&scene->Program);
+        ovrGLProgram_Clear(&scene->Program);
         ovrGeometry_Clear(&scene->GroundPlane);
         ovrGeometry_Clear(&scene->Box);
         for (int i = 0; i < 4; i++) {
@@ -81,7 +81,7 @@ namespace nar
     static void ovrScene_Create(AAssetManager *amgr, XrInstance instance, XrSession session, ovrScene *scene) {
         // Simple ground plane and box geometry.
         {
-            ovrProgram_Create(&scene->Program, VERTEX_SHADER, FRAGMENT_SHADER);
+            ovrGLProgram_Create(&scene->Program, VERTEX_SHADER, FRAGMENT_SHADER);
             ovrGeometry_CreateGroundPlane(&scene->GroundPlane);
             ovrGeometry_CreateBox(&scene->Box);
 
@@ -459,7 +459,7 @@ namespace nar
     static void ovrScene_Destroy(ovrScene *scene) {
         ovrScene_DestroyVAOs(scene);
 
-        ovrProgram_Destroy(&scene->Program);
+        ovrGLProgram_Destroy(&scene->Program);
         ovrGeometry_Destroy(&scene->GroundPlane);
         ovrGeometry_Destroy(&scene->Box);
 

@@ -1,20 +1,13 @@
-#pragma once
-#include "OvrGeometry.h"
+#include "GLProgramOperations.h"
 #include "engine/Macros.h"
-#include "engine/types/ovrProgram.h"
-#include "engine/types/ovrUniform.h"
-#include <openxr/openxr.h>
+#include "engine/types/ovrGLProgram.h"
+#include "GeometryOperations.h"
 #include <stdio.h>
 #include <string.h>
 
 namespace nar
 {
-    static ovrUniform ProgramUniforms[] = {
-        {MODEL_MATRIX, MATRIX4X4, "modelMatrix"},
-        {VIEW_PROJ_MATRIX, MATRIX4X4, "viewProjectionMatrix"},
-    };
-
-    static void ovrProgram_Clear(ovrProgram *program) {
+    void ovrGLProgram_Clear(ovrGLProgram *program) {
         program->Program = 0;
         program->VertexShader = 0;
         program->FragmentShader = 0;
@@ -23,7 +16,7 @@ namespace nar
         memset(program->Textures, 0, sizeof(program->Textures));
     }
 
-    static bool ovrProgram_Create(ovrProgram *program, const char *vertexSource, const char *fragmentSource) {
+    bool ovrGLProgram_Create(ovrGLProgram *program, const char *vertexSource, const char *fragmentSource) {
         GLint r;
 
         GL(program->VertexShader = glCreateShader(GL_VERTEX_SHADER));
@@ -105,7 +98,7 @@ namespace nar
         return true;
     }
 
-    static void ovrProgram_Destroy(ovrProgram *program) {
+    void ovrGLProgram_Destroy(ovrGLProgram *program) {
         if (program->Program != 0) {
             GL(glDeleteProgram(program->Program));
             program->Program = 0;
@@ -119,26 +112,4 @@ namespace nar
             program->FragmentShader = 0;
         }
     }
-
-    static const char VERTEX_SHADER[] =
-        "#version 300 es\n"
-        "in vec3 vertexPosition;\n"
-        "in vec4 vertexColor;\n"
-        "uniform mat4 viewProjectionMatrix;\n"
-        "uniform mat4 modelMatrix;\n"
-        "out vec4 fragmentColor;\n"
-        "void main()\n"
-        "{\n"
-        " gl_Position = viewProjectionMatrix * ( modelMatrix * vec4( vertexPosition, 1.0 ) );\n"
-        " fragmentColor = vertexColor;\n"
-        "}\n";
-
-    static const char FRAGMENT_SHADER[] = "#version 300 es\n"
-                                          "in lowp vec4 fragmentColor;\n"
-                                          "out lowp vec4 outColor;\n"
-                                          "void main()\n"
-                                          "{\n"
-                                          " outColor = fragmentColor;\n"
-                                          "}\n";
-
 }

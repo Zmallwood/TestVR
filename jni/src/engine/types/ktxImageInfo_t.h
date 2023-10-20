@@ -12,7 +12,6 @@ namespace nar
         int numberOfFaces;
         int numberOfMipmapLevels;
         bool mipSizeStored;
-
         const void *data; // caller responsible for freeing memory
         int dataOffset;
         int dataSize;

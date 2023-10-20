@@ -3,7 +3,12 @@
 #include <sys/prctl.h>
 #include "engine/Macros.h"
 #include <unistd.h>
-#include "engine/JNIEXPORTs.h"
+#include "engine/Global.h"
+#include "OpenXRUtilityFunctions.h"
+#include "gl/GeometryOperations.h"
+#include "input/TrackedControllerOperations.h"
+#include "AppOperations.h"
+#include "engine/NativeActivity.h"
 
 namespace nar
 {

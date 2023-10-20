@@ -1,30 +1,13 @@
-#pragma once
+#include "GeometryOperations.h"
+#include "engine/Macros.h"
+#include "engine/types/ovrGeometry.h"
 #include <GLES3/gl3.h>
 #include <stdio.h>
 #include <string.h>
-#include "engine/types/ovrGeometry.h"
 
 namespace nar
 {
-    enum VertexAttributeLocation {
-        VERTEX_ATTRIBUTE_LOCATION_POSITION,
-        VERTEX_ATTRIBUTE_LOCATION_COLOR,
-        VERTEX_ATTRIBUTE_LOCATION_UV,
-        VERTEX_ATTRIBUTE_LOCATION_TRANSFORM
-    };
-
-    struct ovrVertexAttribute {
-        enum VertexAttributeLocation location;
-        const char *name;
-    };
-
-    static ovrVertexAttribute ProgramVertexAttributes[] = {
-        {VERTEX_ATTRIBUTE_LOCATION_POSITION, "vertexPosition"},
-        {VERTEX_ATTRIBUTE_LOCATION_COLOR, "vertexColor"},
-        {VERTEX_ATTRIBUTE_LOCATION_UV, "vertexUv"},
-    };
-
-    static void ovrGeometry_Clear(ovrGeometry *geometry) {
+    void ovrGeometry_Clear(ovrGeometry *geometry) {
         geometry->VertexBuffer = 0;
         geometry->IndexBuffer = 0;
         geometry->VertexArrayObject = 0;
@@ -36,11 +19,11 @@ namespace nar
         }
     }
 
-    static void ovrGeometry_CreateGroundPlane(ovrGeometry *geometry) {
-        typedef struct {
+    void ovrGeometry_CreateGroundPlane(ovrGeometry *geometry) {
+        struct ovrCubeVertices {
             float positions[12][4];
             unsigned char colors[12][4];
-        } ovrCubeVertices;
+        };
 
         static const ovrCubeVertices cubeVertices = {
             // positions
@@ -111,11 +94,11 @@ namespace nar
         GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
     }
 
-    static void ovrGeometry_CreateStagePlane(ovrGeometry *geometry, float minx, float minz, float maxx, float maxz) {
-        typedef struct {
+    void ovrGeometry_CreateStagePlane(ovrGeometry *geometry, float minx, float minz, float maxx, float maxz) {
+        struct ovrCubeVertices {
             float positions[12][4];
             unsigned char colors[12][4];
-        } ovrCubeVertices;
+        };
 
         const ovrCubeVertices cubeVertices = {
             // positions
@@ -186,11 +169,11 @@ namespace nar
         GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
     }
 
-    static void ovrGeometry_CreateBox(ovrGeometry *geometry) {
-        typedef struct {
+    void ovrGeometry_CreateBox(ovrGeometry *geometry) {
+        struct ovrCubeVertices {
             float positions[8][4];
             unsigned char colors[8][4];
-        } ovrCubeVertices;
+        };
 
         static const ovrCubeVertices cubeVertices = {
             // positions
@@ -264,14 +247,14 @@ namespace nar
         GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
     }
 
-    static void ovrGeometry_Destroy(ovrGeometry *geometry) {
+    void ovrGeometry_Destroy(ovrGeometry *geometry) {
         GL(glDeleteBuffers(1, &geometry->IndexBuffer));
         GL(glDeleteBuffers(1, &geometry->VertexBuffer));
 
         ovrGeometry_Clear(geometry);
     }
 
-    static void ovrGeometry_CreateVAO(ovrGeometry *geometry) {
+    void ovrGeometry_CreateVAO(ovrGeometry *geometry) {
         GL(glGenVertexArrays(1, &geometry->VertexArrayObject));
         GL(glBindVertexArray(geometry->VertexArrayObject));
 
@@ -292,7 +275,7 @@ namespace nar
         GL(glBindVertexArray(0));
     }
 
-    static void ovrGeometry_DestroyVAO(ovrGeometry *geometry) {
+    void ovrGeometry_DestroyVAO(ovrGeometry *geometry) {
         GL(glDeleteVertexArrays(1, &geometry->VertexArrayObject));
     }
 }
