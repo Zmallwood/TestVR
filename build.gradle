@@ -1,0 +1,81 @@
+buildscript {
+        repositories {
+            google()
+            jcenter()
+        }
+
+        dependencies {
+            classpath 'com.android.tools.build:gradle:4.0.0'
+        }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+apply plugin: 'com.android.application'
+//apply from: "${rootProject.projectDir}/build.gradle"
+
+
+
+android {
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libopenxr_loader.so'
+        pickFirst 'lib/arm64-v8a/libxrcompositor.so'
+
+    }
+
+  // This is the name of the generated apk file, which will have
+  // -debug.apk or -release.apk appended to it.
+  // The filename doesn't effect the Android installation process.
+  // Use only letters to remain compatible with the package name.
+  project.archivesBaseName = "hellopolygon"
+
+
+    externalNativeBuild {
+
+        ndkBuild {
+            path 'jni/Android.mk'
+        }
+    }
+
+  defaultConfig {
+    // Gradle replaces the manifest package with this value, which must
+    // be unique on a system.  If you don't change it, a new app
+    // will replace an older one.
+    applicationId "com.example.j4q." + project.archivesBaseName
+    minSdkVersion 26
+    targetSdkVersion 25
+    compileSdkVersion 26
+
+    // override app plugin abiFilters for 64-bit support
+    externalNativeBuild {
+        ndk {
+                abiFilters 'arm64-v8a'
+        }
+        ndkBuild {
+                abiFilters 'arm64-v8a'
+        }
+
+    }
+
+
+  }
+
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+      java.srcDirs = ['j4q/java', 'src/main/java']
+      jniLibs.srcDir 'libs'
+
+      assets.srcDirs = ['assets']
+    }
+  }
+
+  lintOptions {
+    disable 'ExpiredTargetSdkVersion'
+  }
+
+
+}

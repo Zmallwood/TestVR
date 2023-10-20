@@ -1,0 +1,6 @@
+rootProject.projectDir = new File(settingsDir, '.')
+rootProject.name = "J4Q"
+
+include ':',\
+//    ':TestVR', \
+    ':JavaForQuest:Projects:HelloPolygon'
