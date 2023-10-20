@@ -7,8 +7,11 @@
 #include "OpenXRUtilityFunctions.h"
 #include "gl/GeometryOperations.h"
 #include "input/TrackedControllerOperations.h"
-#include "AppOperations.h"
+#include "vr_app/AppOperations.h"
 #include "engine/NativeActivity.h"
+#include "Angelos.h"
+#include "EglOperations.h"
+#include "RendererOperations.h"
 
 namespace nar
 {

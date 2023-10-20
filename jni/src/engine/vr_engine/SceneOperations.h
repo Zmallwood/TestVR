@@ -1,5 +1,5 @@
 #pragma once
-#include "KTXLoading.h"
+#include "gl/KTXLoading.h"
 #include "OpenXRUtilityFunctions.h"
 #include "OvrApp_GetInstance.h"
 #include "gl/GeometryOperations.h"

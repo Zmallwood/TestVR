@@ -1,7 +1,8 @@
 #include "NativeActivity.h"
 #include <android_native_app_glue.h>
 #include "Macros.h"
-#include "vr_engine/AppOperations.h"
+#include "vr_engine/vr_app/AppOperations.h"
+#include "types/ovrApp.h"
 
 namespace nar
 {

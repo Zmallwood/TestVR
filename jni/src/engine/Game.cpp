@@ -6,7 +6,7 @@
 #include "vr_engine/OvrApp_GetInstance.h"
 #include "vr_engine/RendererOperations.h"
 #include "vr_engine/EglOperations.h"
-#include "vr_engine/AppOperations.h"
+#include "vr_engine/vr_app/AppOperations.h"
 
 namespace nar
 {

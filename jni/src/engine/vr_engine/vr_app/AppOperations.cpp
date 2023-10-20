@@ -1,14 +1,14 @@
-#pragma once
-#include "EglOperations.h"
-#include "RendererOperations.h"
-#include "SceneOperations.h"
+#include "AppOperations.h"
 #include "engine/Constants.h"
-#include <assert.h>
 #include "engine/types/ovrApp.h"
+#include "engine/vr_engine/EglOperations.h"
+#include "engine/vr_engine/RendererOperations.h"
+#include "engine/vr_engine/SceneOperations.h"
+#include <assert.h>
 
 namespace nar
 {
-    static void ovrApp_Clear(ovrApp *app) {
+    void ovrApp_Clear(ovrApp *app) {
         app->NativeWindow = NULL;
         app->Resumed = false;
         app->Focused = false;
@@ -42,7 +42,7 @@ namespace nar
         ovrRenderer_Clear(&app->Renderer);
     }
 
-    static void ovrApp_Destroy(ovrApp *app) {
+    void ovrApp_Destroy(ovrApp *app) {
         if (app->SupportedDisplayRefreshRates != NULL) {
             free(app->SupportedDisplayRefreshRates);
         }
@@ -50,7 +50,7 @@ namespace nar
         ovrApp_Clear(app);
     }
 
-    static void ovrApp_HandleSessionStateChanges(ovrApp *app, XrSessionState state) {
+    void ovrApp_HandleSessionStateChanges(ovrApp *app, XrSessionState state) {
         if (state == XR_SESSION_STATE_READY) {
             assert(app->Resumed);
             assert(app->NativeWindow != NULL);
@@ -135,7 +135,7 @@ namespace nar
         }
     }
 
-    static void ovrApp_HandleXrEvents(ovrApp *app) {
+    void ovrApp_HandleXrEvents(ovrApp *app) {
         XrEventDataBuffer eventDataBuffer = {};
 
         // Poll for events
